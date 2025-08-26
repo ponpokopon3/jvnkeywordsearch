@@ -1,0 +1,10 @@
+pyarrow
+pytest-cov
+pytest-mock
+python-duckdb
+pytorch
+qdldl-python
+re2
+s3transfer
+selenium
+sleef
