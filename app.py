@@ -1,3 +1,4 @@
+import os
 import argparse
 import csv
 import json
@@ -8,6 +9,10 @@ import requests
 import feedparser
 
 API_ENDPOINT = "https://jvndb.jvn.jp/myjvn"
+
+OUTPUT_DIR = "result"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+OUTPUT_PATH = os.path.join(OUTPUT_DIR, "results.json")
 
 def search_jvn(keyword: str, lang: str = "ja", limit: int = 30) -> List[Dict]:
     params = {
@@ -61,7 +66,7 @@ def main():
                 keyword = row[0].strip()
                 items = search_jvn(keyword, lang="ja", limit=30)
                 all_results.extend(items)
-        with open("results.json", "w", encoding="utf-8") as out_f:
+        with open(OUTPUT_PATH, "w", encoding="utf-8") as out_f:
             json.dump(all_results, out_f, ensure_ascii=False, indent=2)
         print("検索結果を results.json に出力しました。")
     except Exception as e:
