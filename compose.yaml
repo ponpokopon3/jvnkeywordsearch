@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jvnkeywordsearch
+    working_dir: /app
+    volumes:
+      - ./result:/app/result
+    environment:
+      - TZ=Asia/Tokyo
+      - PYTHONUNBUFFERED=1
+    command: ["python", "app.py","--input","keywords.csv"]
